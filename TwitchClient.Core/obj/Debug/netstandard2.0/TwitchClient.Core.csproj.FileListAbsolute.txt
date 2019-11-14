@@ -1,0 +1,8 @@
+D:\Projects\TwitchClient\TwitchClient.Core\bin\Debug\netstandard2.0\TwitchClient.Core.deps.json
+D:\Projects\TwitchClient\TwitchClient.Core\bin\Debug\netstandard2.0\TwitchClient.Core.dll
+D:\Projects\TwitchClient\TwitchClient.Core\bin\Debug\netstandard2.0\TwitchClient.Core.pdb
+D:\Projects\TwitchClient\TwitchClient.Core\obj\Debug\netstandard2.0\TwitchClient.Core.csprojAssemblyReference.cache
+D:\Projects\TwitchClient\TwitchClient.Core\obj\Debug\netstandard2.0\TwitchClient.Core.AssemblyInfoInputs.cache
+D:\Projects\TwitchClient\TwitchClient.Core\obj\Debug\netstandard2.0\TwitchClient.Core.AssemblyInfo.cs
+D:\Projects\TwitchClient\TwitchClient.Core\obj\Debug\netstandard2.0\TwitchClient.Core.dll
+D:\Projects\TwitchClient\TwitchClient.Core\obj\Debug\netstandard2.0\TwitchClient.Core.pdb

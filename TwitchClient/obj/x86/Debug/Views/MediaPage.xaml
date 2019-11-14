@@ -1,0 +1,93 @@
+﻿<Page
+    x:Class="TwitchClient.Views.MediaPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:TwitchClient.ViewModels"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
+    <Grid x:ConnectionId='2' x:Name="ContentArea">
+        <Grid Background="DarkGreen" Visibility="{Binding NotifyVisibility}" Opacity="0.8" Canvas.ZIndex="1" Width="500" Height="60" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Run Text="Video is recording: "/>
+                <Run Text="{Binding RecordTime}"/>
+            </TextBlock>
+        </Grid>
+        <Grid
+            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <ScrollViewer Height="auto" Grid.RowSpan="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="300"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <MediaElement AreTransportControlsEnabled="True"
+                              Source="{Binding SelectedMedia.Video_source, UpdateSourceTrigger=PropertyChanged}"  
+                              Stretch="Uniform"
+                              MinHeight="200"
+                              MaxHeight="450"
+                              Grid.Row="0"
+                              Grid.ColumnSpan="2">
+                        <MediaElement.TransportControls>
+                            <MediaTransportControls IsCompact="True" IsCompactOverlayEnabled="True" IsSeekBarVisible="False" IsZoomButtonVisible="False" IsCompactOverlayButtonVisible="True"></MediaTransportControls>
+                        </MediaElement.TransportControls>
+                    </MediaElement>
+                    <ListView x:ConnectionId='3' SelectionMode="None" x:Name="ChatBox" ScrollViewer.BringIntoViewOnFocusChange="True" Height="450" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollMode="Enabled" Grid.Column="2" ItemsSource="{Binding SelectedMedia.ChatMessages}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock>
+                                    <Run FontWeight="Medium" Text="{Binding User}"/>
+                                    <Run FontWeight="Medium" Text=": "/>
+                                    <Run Text="{Binding Message}"/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Image Source="{Binding SelectedMedia.Atr_url}" Width="85" Height="113" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Top" Margin="4" HorizontalAlignment="Left"/>
+                    <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel HorizontalAlignment="Left">
+                            <TextBlock FontWeight="SemiBold" TextWrapping="Wrap" FontSize="17" Text="{Binding SelectedMedia.Title}" />
+                            <TextBlock FontWeight="SemiLight" TextWrapping="Wrap" Text="{Binding SelectedMedia.Description}"/>
+                            <TextBlock FontWeight="SemiLight">
+                    <Run x:Uid="PlayIn" Text=": "/>
+                    <Run FontWeight="Normal" Text="{Binding SelectedMedia.Game_name, UpdateSourceTrigger=PropertyChanged}"/>
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Margin="0,10,10,0" TextWrapping="Wrap"  HorizontalAlignment="Right">
+                <Run Text="&#xE77B;" FontFamily="Segoe MDL2 Assets"/>
+                <Run Text="{Binding SelectedMedia.Viewer_count, UpdateSourceTrigger=PropertyChanged}"/>
+                            </TextBlock>
+                            <TextBlock Margin="0,0,10,0"  HorizontalAlignment="Right">
+                    <Run Text="&#xE7B3;" FontFamily="Segoe MDL2 Assets"/>
+                    <Run Text="{Binding SelectedMedia.View_count, UpdateSourceTrigger=PropertyChanged}"/>
+                            </TextBlock>
+                            <Button Content="Record" HorizontalAlignment="Center" Command="{Binding StartRecordCommand}"/>
+                            <Button Content="Stop" HorizontalAlignment="Center" Command="{Binding StopRecordCommand}"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>
+

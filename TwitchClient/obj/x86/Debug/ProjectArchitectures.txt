@@ -1,0 +1,1 @@
+D:\Projects\TwitchClient\TwitchClient\TwitchClient.csproj;x86
