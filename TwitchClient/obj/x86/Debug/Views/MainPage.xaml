@@ -7,6 +7,7 @@
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:vm="using:TwitchClient.ViewModels"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d"
     >
@@ -21,6 +22,13 @@
                         <RowDefinition Height="50"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
+                    <controls:Loading Grid.RowSpan="4" Canvas.ZIndex="1" Background="White" Opacity="0.7" IsLoading="{Binding IsLoading}">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                            <ProgressRing Width="50" Height="50" IsActive="{Binding IsLoading}"/>
+                            <TextBlock Foreground="Black" FontWeight="SemiBold" FontSize="30" Text="Content is loading"/>
+                        </StackPanel>
+                    </controls:Loading>
+
                     <TextBlock Margin="20,0,0,0" Text="Популярные трансляции" VerticalAlignment="Center" FontWeight="SemiLight" FontSize="20"/>
                     <GridView ItemsSource="{Binding streamModels, UpdateSourceTrigger=PropertyChanged}"
                   IsItemClickEnabled="True"
@@ -28,7 +36,6 @@
                   SelectionMode="Single"
                   Grid.Row="1"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                  SelectedItem="{Binding SelectedInfo, Mode=TwoWay}"
                   HorizontalAlignment="Center">
                         <Interactivity:Interaction.Behaviors>
                             <Core:EventTriggerBehavior EventName="ItemClick">
@@ -44,7 +51,7 @@
                         <GridView.ItemTemplate>
                             <DataTemplate>
 
-                                <Grid Width="340" Margin="10">
+                                <Grid Width="340">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="25"/>
                                         <ColumnDefinition/>
@@ -93,7 +100,7 @@
                         </GridView.ItemsPanel>
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Grid Width="188" Margin="10">
+                                <Grid Width="188">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="250"/>
                                         <RowDefinition/>

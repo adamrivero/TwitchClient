@@ -6,9 +6,11 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using TwitchClient.Core;
 using TwitchClient.Services;
+using TwitchClient.Views;
 using Windows.Storage;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace TwitchClient.ViewModels
 {
@@ -21,13 +23,19 @@ namespace TwitchClient.ViewModels
         public ObservableCollection<StreamModel> streamModels { get; private set; }
         public SearchViewModel()
         {
-            
-            
+            localData = ApplicationData.Current.LocalSettings;
+            if ((string)localData.Values["Search_type"] == "Category")
+            {
+                searchParam = (string)localData.Values["Game_name"];
+            }
+            else
+            {
+                searchParam = (string)localData.Values["Search_param"];
+            }
             streamModels = new ObservableCollection<StreamModel>();
             API = new ApiRequest();
-            GetStreams();
+            GetStreams(searchParam);
         }
-
 
         public async void ClickCommand(object sender, object parameter)
         {
@@ -37,15 +45,9 @@ namespace TwitchClient.ViewModels
             localData.Values["User_login"] = UserLogin.data.First().login;
             NavigationService.Navigate("TwitchClient.ViewModels.MediaViewModel");
         }
-        private async void GetStreams()
+        private async void GetStreams(string param)
         {
-            var localData = ApplicationData.Current.LocalSettings;
-            if ((string)localData.Values["Search_param"] != null)
-            {
-                searchParam = (string)localData.Values["Search_param"];
-            }
-            else { searchParam = (string)localData.Values["Game_name"]; }
-            var streams = await API.SearchStream($"{searchParam}");
+            var streams = await API.SearchStream(param);
             foreach (var stream in streams.streams)
             {
                 streamModels.Add(new StreamModel

@@ -19,7 +19,7 @@
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
     <LayoutDir>D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\AppX</LayoutDir>
-    <RegisteredManifestChecksum>98AA7ACCDF46D08935617AB9683DB64B0E88632C9707D930F1B0FB1AFFF6B291</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>641C16CC2B7AE1E3679C98EF6042AB1D1BAEE5AB2D18A375C0C200F4093ACE20</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>7F16C791-5A0A-410D-BA3E-B3DECEA88C6E_1.0.0.0_x86__nr4xmq1fjg2k0</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>7F16C791-5A0A-410D-BA3E-B3DECEA88C6E_nr4xmq1fjg2k0!App</RegisteredUserModeAppID>
     <RegisteredPackageID>7F16C791-5A0A-410D-BA3E-B3DECEA88C6E</RegisteredPackageID>
@@ -30,13 +30,49 @@
     <AppXManifest Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-11-14T12:20:12.344</Modified>
+      <Modified>2019-11-15T12:13:16.880</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\TwitchClient.exe">
       <PackagePath>entrypoint\TwitchClient.exe</PackagePath>
-      <Modified>2019-11-14T12:20:11.435</Modified>
+      <Modified>2019-11-15T12:13:15.074</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Захар Листьев\.nuget\packages\colorcode.core\2.0.6\lib\netstandard1.4\ColorCode.Core.dll">
+      <PackagePath>ColorCode.Core.dll</PackagePath>
+      <Modified>2018-10-05T20:30:08.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Захар Листьев\.nuget\packages\colorcode.uwp\2.0.6\lib\uap10.0\ColorCode.UWP.dll">
+      <PackagePath>ColorCode.UWP.dll</PackagePath>
+      <Modified>2018-10-05T20:30:16.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Захар Листьев\.nuget\packages\microsoft.toolkit\6.0.0\lib\netstandard2.0\Microsoft.Toolkit.dll">
+      <PackagePath>Microsoft.Toolkit.dll</PackagePath>
+      <Modified>2019-11-13T00:36:00.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Захар Листьев\.nuget\packages\microsoft.toolkit.parsers\6.0.0\lib\netstandard2.0\Microsoft.Toolkit.Parsers.dll">
+      <PackagePath>Microsoft.Toolkit.Parsers.dll</PackagePath>
+      <Modified>2019-11-13T00:36:02.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Захар Листьев\.nuget\packages\microsoft.toolkit.uwp\6.0.0\lib\uap10.0.16299\Microsoft.Toolkit.Uwp.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.dll</PackagePath>
+      <Modified>2019-11-13T00:36:08.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Захар Листьев\.nuget\packages\microsoft.toolkit.uwp.connectivity\6.0.0\lib\uap10.0.16299\Microsoft.Toolkit.Uwp.Connectivity.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.Connectivity.dll</PackagePath>
+      <Modified>2019-11-13T00:36:10.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Захар Листьев\.nuget\packages\microsoft.toolkit.uwp.ui\6.0.0\lib\uap10.0.16299\Microsoft.Toolkit.Uwp.UI.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.dll</PackagePath>
+      <Modified>2019-11-13T00:36:28.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Захар Листьев\.nuget\packages\microsoft.toolkit.uwp.ui.animations\6.0.0\lib\uap10.0.16299\Microsoft.Toolkit.Uwp.UI.Animations.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Animations.dll</PackagePath>
+      <Modified>2019-11-13T00:36:30.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Захар Листьев\.nuget\packages\microsoft.toolkit.uwp.ui.controls\6.0.0\lib\uap10.0.16299\Microsoft.Toolkit.Uwp.UI.Controls.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls.dll</PackagePath>
+      <Modified>2019-11-13T00:36:34.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Захар Листьев\.nuget\packages\microsoft.xaml.behaviors.uwp.managed\2.0.1\lib\uap10.0\Microsoft.Xaml.Interactions.dll">
       <PackagePath>Microsoft.Xaml.Interactions.dll</PackagePath>
@@ -62,9 +98,17 @@
       <PackagePath>System.Runtime.dll</PackagePath>
       <Modified>2019-07-22T12:01:14.000</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Захар Листьев\.nuget\packages\win2d.uwp\1.24.0\runtimes\win10-x86\native\Microsoft.Graphics.Canvas.dll">
+      <PackagePath>Microsoft.Graphics.Canvas.dll</PackagePath>
+      <Modified>2019-10-25T20:27:44.000</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient.Core\bin\Debug\netstandard2.0\TwitchClient.Core.dll">
       <PackagePath>TwitchClient.Core.dll</PackagePath>
-      <Modified>2019-11-13T21:35:18.885</Modified>
+      <Modified>2019-11-15T09:01:56.309</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Захар Листьев\.nuget\packages\win2d.uwp\1.24.0\lib\uap10.0\Microsoft.Graphics.Canvas.winmd">
+      <PackagePath>Microsoft.Graphics.Canvas.winmd</PackagePath>
+      <Modified>2019-10-25T20:27:44.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\bin\10.0.18362.0\XamlCompiler\Microsoft.UI.Xaml.Markup.winmd">
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
@@ -114,51 +158,55 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\TwitchClient.xr.xml">
       <PackagePath>TwitchClient.xr.xml</PackagePath>
-      <Modified>2019-11-14T12:11:17.855</Modified>
+      <Modified>2019-11-15T12:13:14.589</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Microsoft.UI.Xaml\DensityStyles\Compact.xbf">
       <PackagePath>Microsoft.UI.Xaml\DensityStyles\Compact.xbf</PackagePath>
-      <Modified>2019-11-14T12:17:32.863</Modified>
+      <Modified>2019-11-15T12:13:14.642</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2019-11-14T12:17:32.863</Modified>
+      <Modified>2019-11-15T12:13:14.643</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Styles\Page.xbf">
       <PackagePath>Styles\Page.xbf</PackagePath>
-      <Modified>2019-11-14T12:17:32.863</Modified>
+      <Modified>2019-11-15T12:13:14.643</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Styles\_Colors.xbf">
       <PackagePath>Styles\_Colors.xbf</PackagePath>
-      <Modified>2019-11-14T12:17:32.863</Modified>
+      <Modified>2019-11-15T12:13:14.643</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Styles\_FontSizes.xbf">
       <PackagePath>Styles\_FontSizes.xbf</PackagePath>
-      <Modified>2019-11-14T12:17:32.863</Modified>
+      <Modified>2019-11-15T12:13:14.643</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Styles\_Thickness.xbf">
       <PackagePath>Styles\_Thickness.xbf</PackagePath>
-      <Modified>2019-11-14T12:17:32.863</Modified>
+      <Modified>2019-11-15T12:13:14.643</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Styles\TextBlock.xbf">
       <PackagePath>Styles\TextBlock.xbf</PackagePath>
-      <Modified>2019-11-14T12:17:32.863</Modified>
+      <Modified>2019-11-15T12:13:14.643</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Views\MainPage.xbf">
       <PackagePath>Views\MainPage.xbf</PackagePath>
-      <Modified>2019-11-14T12:17:32.863</Modified>
+      <Modified>2019-11-15T12:13:14.631</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Views\MediaPage.xbf">
       <PackagePath>Views\MediaPage.xbf</PackagePath>
-      <Modified>2019-11-14T12:17:32.863</Modified>
+      <Modified>2019-11-15T12:13:14.643</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Views\ProjectionViewPage.xbf">
+      <PackagePath>Views\ProjectionViewPage.xbf</PackagePath>
+      <Modified>2019-11-15T12:13:14.643</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Views\SearchPage.xbf">
       <PackagePath>Views\SearchPage.xbf</PackagePath>
-      <Modified>2019-11-14T12:17:32.863</Modified>
+      <Modified>2019-11-15T12:13:14.644</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Views\ShellPage.xbf">
       <PackagePath>Views\ShellPage.xbf</PackagePath>
-      <Modified>2019-11-14T12:17:32.863</Modified>
+      <Modified>2019-11-15T12:13:14.644</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.18362.0\\redist\Debug\x86\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -172,13 +220,17 @@
       <PackagePath>WinMetadata\Microsoft.UI.Xaml.winmd</PackagePath>
       <Modified>2019-09-18T00:58:38.000</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Захар Листьев\.nuget\packages\microsoft.toolkit.uwp.ui.controls\6.0.0\lib\uap10.0.16299\Microsoft.Toolkit.Uwp.UI.Controls\Microsoft.Toolkit.Uwp.UI.Controls.xr.xml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\Microsoft.Toolkit.Uwp.UI.Controls.xr.xml</PackagePath>
+      <Modified>2019-11-13T00:32:36.000</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2019-11-14T10:29:52.160</Modified>
+      <Modified>2019-11-15T12:13:15.601</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Core\TwitchClient.exe">
       <PackagePath>TwitchClient.exe</PackagePath>
-      <Modified>2019-11-14T12:20:12.328</Modified>
+      <Modified>2019-11-15T12:13:16.874</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

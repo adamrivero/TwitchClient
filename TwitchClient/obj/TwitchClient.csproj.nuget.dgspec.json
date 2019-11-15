@@ -100,6 +100,14 @@
               "target": "Package",
               "version": "[6.2.9, )"
             },
+            "Microsoft.Toolkit.Uwp.Connectivity": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.Toolkit.Uwp.UI.Controls": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Microsoft.UI.Xaml": {
               "target": "Package",
               "version": "[2.2.190917002, )"

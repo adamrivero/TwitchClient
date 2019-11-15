@@ -21,6 +21,7 @@ namespace TwitchClient.ViewModels
     {
         //ProjectionControls projection;
         //InternetConnection connection;
+        Thread thread;
         private Downloader _downloader = null;
         ApplicationDataContainer localData;
         private MediaModel selectedMedia;
@@ -37,7 +38,16 @@ namespace TwitchClient.ViewModels
                 RaisePropertyChanged("NotifyVisibility");
             }
         }
-        Thread thread;
+        private bool isLoading;
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set
+            {
+                isLoading = value;
+                RaisePropertyChanged("IsLoading");
+            }
+        }
 
         public string Login
         {
@@ -111,31 +121,51 @@ namespace TwitchClient.ViewModels
 
         private async void GetStreams()
         {
+            IsLoading = true;
+
             //connection.CheckConnection();
             //if (connection.IsConnected)
             //{
             Uri m3u8 = await API.UriAsync(Login);
             var streams = await API.GetStreamInfoAsync($"user_login={Login}");
+            UserModel users = new UserModel();
+            GameModel games = new GameModel();
             foreach (var stream in streams.data)
             {
-                var users = await API.GetUserInfoAsync(stream.user_id);
-                var games = await API.GetGameInfoAsync(stream.game_id.ToString());
-                
-                string set_atr_size = games.data.FirstOrDefault(a => a.id == stream.game_id.ToString()).box_art_url.Replace("{width}", "85");
-                set_atr_size = set_atr_size.Replace("{height}", "113");
-                SelectedMedia = new MediaModel
+                Thread thread1 = new Thread(async () =>
                 {
-                    Login = users.data[0].login,
-                    Atr_url = set_atr_size,
-                    Game_name = games.data.FirstOrDefault(a => a.id == stream.game_id.ToString()).name,
-                    Video_source = new Uri(await API.ParseM3UAsync(m3u8, "720p60")),
-                    Description = users.data.FirstOrDefault(a => a.id == stream.user_id).description,
-                    Display_name = users.data.FirstOrDefault(a => a.id == stream.user_id).display_name,
-                    Title = stream.title,
-                    Viewer_count = stream.viewer_count,
-                    View_count = users.data.FirstOrDefault(a => a.id == stream.user_id).view_count,
-                    ChatMessages = new ObservableCollection<ChatModel>()
-                };
+                    users = await API.GetUserInfoAsync(stream.user_id);
+                    games = await API.GetGameInfoAsync(stream.game_id.ToString());
+                });
+                thread1.Start();
+                string set_atr_size;
+                test();
+                async void test()
+                {
+                    if (games.data == null || users.data == null)
+                    {
+                        Thread.Sleep(100);
+                        test();
+                    }
+                    else
+                    {
+                        set_atr_size = games.data.FirstOrDefault(a => a.id == stream.game_id.ToString()).box_art_url.Replace("{width}", "85");
+                        set_atr_size = set_atr_size.Replace("{height}", "113");
+                        SelectedMedia = new MediaModel
+                        {
+                            Login = users.data[0].login,
+                            Atr_url = set_atr_size,
+                            Game_name = games.data.FirstOrDefault(a => a.id == stream.game_id.ToString()).name,
+                            Video_source = new Uri(await API.ParseM3UAsync(m3u8, "720p60")),
+                            Description = users.data.FirstOrDefault(a => a.id == stream.user_id).description,
+                            Display_name = users.data.FirstOrDefault(a => a.id == stream.user_id).display_name,
+                            Title = stream.title,
+                            Viewer_count = stream.viewer_count,
+                            View_count = users.data.FirstOrDefault(a => a.id == stream.user_id).view_count,
+                            ChatMessages = new ObservableCollection<ChatModel>()
+                        };
+                    }
+                }
 
 
                 client.Connected += (object sender, IrcConnectedEventArgs e) =>
@@ -158,6 +188,7 @@ namespace TwitchClient.ViewModels
                     Debug.WriteLine("Reconnected");
                 };
                 thread.Start();
+                IsLoading = false;
             }
             //}
             //else

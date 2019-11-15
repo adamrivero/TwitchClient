@@ -114,7 +114,7 @@ namespace TwitchClient
         public async Task<SearchStreamModel> GetKrakenStreams()
         {
             HttpClient httpClient = new HttpClient();
-            HttpRequestMessage request = new HttpRequestMessage(new HttpMethod("GET"), $"https://api.twitch.tv/kraken/streams/");
+            HttpRequestMessage request = new HttpRequestMessage(new HttpMethod("GET"), $"https://api.twitch.tv/kraken/streams/?limit=10");
             request.Headers.Add("Client-ID", "0pje11teayzq9z2najlxgdcc5d2dy1");
             request.Headers.Add("Accept", "application/vnd.twitchtv.v5+json");
             var response = await httpClient.SendAsync(request);

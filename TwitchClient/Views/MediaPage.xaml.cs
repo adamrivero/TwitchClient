@@ -16,7 +16,7 @@ namespace TwitchClient.Views
         public MediaPage()
         {
             InitializeComponent();
-            DataContext = ViewModel;
+            DataContext = new MediaViewModel();
         }
     }
 }

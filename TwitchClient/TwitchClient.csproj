@@ -119,6 +119,12 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.9</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.Connectivity">
+      <Version>6.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>6.0.0</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.2.190917002</Version>
     </PackageReference>
@@ -138,6 +144,10 @@
   <ItemGroup>
     <Compile Include="Activation\ActivationHandler.cs" />
     <Compile Include="ApiRequest.cs" />
+    <Compile Include="Controls\MediaTransportControlsWithCustomCastButton.cs" />
+    <Compile Include="Controls\ProjectedMediaTransportControls.cs" />
+    <Compile Include="Controls\ProjectionViewBroker.cs" />
+    <Compile Include="Controls\ViewLifetimeControl.cs" />
     <Compile Include="Helpers\Downloader.cs" />
     <Compile Include="Helpers\NavHelper.cs" />
     <Compile Include="Services\ActivationService.cs" />
@@ -158,6 +168,9 @@
     </Compile>
     <Compile Include="Views\MediaPage.xaml.cs">
       <DependentUpon>MediaPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProjectionViewPage.xaml.cs">
+      <DependentUpon>ProjectionViewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
@@ -200,6 +213,10 @@
     <Page Include="Views\MediaPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ProjectionViewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SearchPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -245,6 +262,7 @@
       <Name>TwitchClient.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

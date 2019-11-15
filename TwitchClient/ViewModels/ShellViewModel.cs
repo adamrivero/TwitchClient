@@ -11,11 +11,13 @@ using GalaSoft.MvvmLight.Command;
 
 using TwitchClient.Helpers;
 using TwitchClient.Services;
+using TwitchClient.Views;
 using Windows.Storage;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 using WinUI = Microsoft.UI.Xaml.Controls;
@@ -65,7 +67,8 @@ namespace TwitchClient.ViewModels
         private void SearchStream()
         {
             localData.Values["Search_param"] = SearchParam;
-            NavigationService.Navigate("TwitchClient.ViewModels.SearchViewModel");
+            localData.Values["Search_type"] = "TitleBarSearch";
+            NavigationService.Navigate("TwitchClient.ViewModels.SearchViewModel", SearchParam);
             Debug.WriteLine("SAdasjhdkjsahdjas");
         }
         public ShellViewModel()
@@ -98,7 +101,7 @@ namespace TwitchClient.ViewModels
                             .OfType<WinUI.NavigationViewItem>()
                             .First(menuItem => (string)menuItem.Content == (string)args.InvokedItem);
             var pageKey = item.GetValue(NavHelper.NavigateToProperty) as string;
-            NavigationService.Navigate(pageKey);
+            NavigationService.Navigate(pageKey, null, new DrillInNavigationTransitionInfo());
         }
 
         private void OnBackRequested(WinUI.NavigationView sender, WinUI.NavigationViewBackRequestedEventArgs args)

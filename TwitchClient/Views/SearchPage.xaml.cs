@@ -16,7 +16,7 @@ namespace TwitchClient.Views
         public SearchPage()
         {
             InitializeComponent();
-            DataContext = ViewModel;
+            DataContext = new SearchViewModel();
         }
     }
 }
