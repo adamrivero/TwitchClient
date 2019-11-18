@@ -85,7 +85,7 @@ namespace TwitchClient.Views
             await broker.ProjectionViewPageControl.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 this.broker.NotifyProjectionStopping();
-                MainPage.Current.ProjectionViewPageControl = null;
+                ShellPage.Current.ProjectionViewPageControl = null;
             });
 
             this._player.Stop();

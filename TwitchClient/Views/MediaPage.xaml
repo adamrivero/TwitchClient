@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:TwitchClient.ViewModels"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
 
@@ -55,19 +56,26 @@
                             <MediaTransportControls IsCompact="True" IsCompactOverlayEnabled="True" IsSeekBarVisible="False" IsZoomButtonVisible="False" IsCompactOverlayButtonVisible="True"></MediaTransportControls>
                         </MediaElement.TransportControls>
                     </MediaElement>
-                    <ListView SelectionMode="None" x:Name="ChatBox" ScrollViewer.BringIntoViewOnFocusChange="True" Height="450" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollMode="Enabled" Grid.Column="2" ItemsSource="{Binding SelectedMedia.ChatMessages}" Style="{StaticResource HandwritingViewCandidateStyle}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <TextBlock>
-                                    <Run FontWeight="Medium" Text="{Binding User}"/>
-                                    <Run FontWeight="Medium" Text=": "/>
-                                    <Run Text="{Binding Message}"/>
-                                    </TextBlock>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                    <ScrollViewer CanDrag="True" Margin="5" Grid.Column="3" Height="450" Grid.ColumnSpan="2" ScrollViewer.BringIntoViewOnFocusChange="True">
+                    <RichTextBlock ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsScrollInertiaEnabled="True" x:Name="ChatBox">
+                        <Paragraph>
+                            <InlineUIContainer>
+                                <ItemsControl ItemsSource="{Binding SelectedMedia.ChatMessages}" Margin="0">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                                <RichTextBlock CanBeScrollAnchor="True" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsScrollInertiaEnabled="True">
+                                                    <Paragraph>
+                                                    <Run FontWeight="Medium" Text="{Binding User}"/>
+                                                    <Run Text="{Binding Message}"/>
+                                                </Paragraph>
+                                            </RichTextBlock>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </InlineUIContainer>
+                        </Paragraph>
+                    </RichTextBlock>
+                    </ScrollViewer>
                     <Image Source="{Binding SelectedMedia.Atr_url}" Width="85" Height="113" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Top" Margin="4" HorizontalAlignment="Left"/>
                     <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
@@ -93,6 +101,7 @@
                             </TextBlock>
                             <Button Content="Record" HorizontalAlignment="Center" Command="{Binding StartRecordCommand}"/>
                             <Button Content="Stop" HorizontalAlignment="Center" Command="{Binding StopRecordCommand}"/>
+                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Cast" Click="Button_Click" />
                         </StackPanel>
                     </Grid>
                 </Grid>

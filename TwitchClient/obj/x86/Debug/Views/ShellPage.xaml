@@ -28,22 +28,24 @@
             <winui:NavigationViewItem Foreground="White" x:Uid="Shell_Main" helpers:NavHelper.NavigateTo="TwitchClient.ViewModels.MainViewModel" />
             <winui:NavigationViewItem Foreground="White" x:Uid="Shell_Media" helpers:NavHelper.NavigateTo="TwitchClient.ViewModels.MediaViewModel" />
             <winui:NavigationViewItem Foreground="White" x:Uid="Shell_Search" helpers:NavHelper.NavigateTo="TwitchClient.ViewModels.SearchViewModel" />
-            <AutoSuggestBox x:ConnectionId='4' PlaceholderText="Поиск"                                                                                         Margin="10,4" Width="200" QueryIcon="Find">
+            <AppBarButton x:ConnectionId='4' Name="Auth"                                         />
+            <AutoSuggestBox x:ConnectionId='5' PlaceholderText="Поиск"                                                                                         Margin="10,4" Width="200" QueryIcon="Find">
                 <i:Interaction.Behaviors>
                     <ic:EventTriggerBehavior EventName="QuerySubmitted">
-                        <ic:InvokeCommandAction x:ConnectionId='5'                                            />
+                        <ic:InvokeCommandAction x:ConnectionId='6'                                            />
                     </ic:EventTriggerBehavior>
                 </i:Interaction.Behaviors>
             </AutoSuggestBox>
         </winui:NavigationView.MenuItems>
         <i:Interaction.Behaviors>
             <ic:EventTriggerBehavior EventName="ItemInvoked">
-                <ic:InvokeCommandAction x:ConnectionId='6'                                                 />
+                <ic:InvokeCommandAction x:ConnectionId='7'                                                 />
             </ic:EventTriggerBehavior>
         </i:Interaction.Behaviors>
         <Grid>
-            <Frame x:ConnectionId='7' x:Name="shellFrame" />
+            <Frame x:ConnectionId='8' Grid.Row="1" x:Name="shellFrame" />
         </Grid>
     </winui:NavigationView>
+
 </Page>
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -12,6 +14,7 @@ using GalaSoft.MvvmLight.Command;
 using TwitchClient.Helpers;
 using TwitchClient.Services;
 using TwitchClient.Views;
+using Windows.Security.Authentication.Web;
 using Windows.Storage;
 using Windows.System;
 using Windows.UI.Xaml;
@@ -26,6 +29,7 @@ namespace TwitchClient.ViewModels
 {
     public class ShellViewModel : ViewModelBase
     {
+        StartServer ServerStart;
         private readonly KeyboardAccelerator _altLeftKeyboardAccelerator = BuildKeyboardAccelerator(VirtualKey.Left, VirtualKeyModifiers.Menu);
         private readonly KeyboardAccelerator _backKeyboardAccelerator = BuildKeyboardAccelerator(VirtualKey.GoBack);
         ApplicationDataContainer localData;
@@ -46,6 +50,7 @@ namespace TwitchClient.ViewModels
         private ICommand _loadedCommand;
         private ICommand _itemInvokedCommand;
         private ICommand _searchCommand;
+        private ICommand _authCommand;
 
         public bool IsBackEnabled
         {
@@ -64,6 +69,34 @@ namespace TwitchClient.ViewModels
         public ICommand LoadedCommand => _loadedCommand ?? (_loadedCommand = new RelayCommand(OnLoaded));
         public ICommand ItemInvokedCommand => _itemInvokedCommand ?? (_itemInvokedCommand = new RelayCommand<WinUI.NavigationViewItemInvokedEventArgs>(OnItemInvoked));
         public ICommand SearchCommand => _searchCommand ?? (_searchCommand = new RelayCommand(SearchStream));
+        public ICommand AuthCommand => _authCommand ?? (_authCommand = new RelayCommand(Auth));
+
+        private async void Auth()
+        {
+            Match match;
+            string oauth_token = "";
+            Uri StartUri = new Uri($"https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=0pje11teayzq9z2najlxgdcc5d2dy1&redirect_uri=https://twitchapps.com/tokengen/");
+            WebAuthenticationResult webAuthenticationResult = await WebAuthenticationBroker.AuthenticateAsync(WebAuthenticationOptions.None, StartUri, new Uri("https://twitchapps.com/tokengen/"));
+            Debug.WriteLine(WebAuthenticationBroker.GetCurrentApplicationCallbackUri());
+            switch (webAuthenticationResult.ResponseStatus)
+            {
+                // Successful authentication.  
+                case WebAuthenticationStatus.Success:
+                    Debug.WriteLine(webAuthenticationResult.ResponseData.ToString());
+                    match = Regex.Match(webAuthenticationResult.ResponseData.ToString(), "#access_token=(?<token>.*)&scope=");
+                    oauth_token = match.Groups["token"].Value;
+                    Debug.WriteLine(oauth_token);
+                    break;
+                // HTTP error.  
+                case WebAuthenticationStatus.ErrorHttp:
+                    Debug.WriteLine(webAuthenticationResult.ResponseErrorDetail.ToString());
+                    break;
+                default:
+                    Debug.WriteLine(webAuthenticationResult.ResponseData.ToString());
+                    break;
+            }
+        }
+
         private void SearchStream()
         {
             localData.Values["Search_param"] = SearchParam;
@@ -90,6 +123,8 @@ namespace TwitchClient.ViewModels
         {
             // Keyboard accelerators are added here to avoid showing 'Alt + left' tooltip on the page.
             // More info on tracking issue https://github.com/Microsoft/microsoft-ui-xaml/issues/8
+            ServerStart = new StartServer();
+            await Task.Run(() => ServerStart.DoWork());
             _keyboardAccelerators.Add(_altLeftKeyboardAccelerator);
             _keyboardAccelerators.Add(_backKeyboardAccelerator);
             await Task.CompletedTask;

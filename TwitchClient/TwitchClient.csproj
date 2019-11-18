@@ -150,6 +150,10 @@
     <Compile Include="Controls\ViewLifetimeControl.cs" />
     <Compile Include="Helpers\Downloader.cs" />
     <Compile Include="Helpers\NavHelper.cs" />
+    <Compile Include="HttpHelper.cs" />
+    <Compile Include="OAuth2Broker.cs" />
+    <Compile Include="StartServer.cs" />
+    <Compile Include="Server.cs" />
     <Compile Include="Services\ActivationService.cs" />
     <Compile Include="Activation\DefaultActivationHandler.cs" />
     <Compile Include="Services\NavigationServiceEx.cs" />

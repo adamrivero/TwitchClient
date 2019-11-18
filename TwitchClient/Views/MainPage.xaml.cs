@@ -8,8 +8,6 @@ namespace TwitchClient.Views
 {
     public sealed partial class MainPage : Page
     {
-        public static MainPage Current;
-        public ViewLifetimeControl ProjectionViewPageControl;
         private MainViewModel ViewModel
         {
             get { return ViewModelLocator.Current.MainViewModel; }

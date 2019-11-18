@@ -49,6 +49,10 @@
 
   <Capabilities>
     <Capability Name="internetClient" />
+    <Capability Name="internetClientServer"/>
+    <Capability Name="allJoyn"/>
+    <Capability Name="privateNetworkClientServer" />
+    <Capability Name="internetClientServer" />
   </Capabilities>
 
   <genTemplate:Metadata>

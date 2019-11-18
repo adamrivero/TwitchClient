@@ -19,7 +19,7 @@
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
     <LayoutDir>D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\AppX</LayoutDir>
-    <RegisteredManifestChecksum>641C16CC2B7AE1E3679C98EF6042AB1D1BAEE5AB2D18A375C0C200F4093ACE20</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>02A5C6444895480ADC29F42F2D586E67A6A0DF0742B3C0897491EDEC76C7D04F</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>7F16C791-5A0A-410D-BA3E-B3DECEA88C6E_1.0.0.0_x86__nr4xmq1fjg2k0</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>7F16C791-5A0A-410D-BA3E-B3DECEA88C6E_nr4xmq1fjg2k0!App</RegisteredUserModeAppID>
     <RegisteredPackageID>7F16C791-5A0A-410D-BA3E-B3DECEA88C6E</RegisteredPackageID>
@@ -30,13 +30,13 @@
     <AppXManifest Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-11-15T12:13:16.880</Modified>
+      <Modified>2019-11-18T20:19:13.386</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\TwitchClient.exe">
       <PackagePath>entrypoint\TwitchClient.exe</PackagePath>
-      <Modified>2019-11-15T12:13:15.074</Modified>
+      <Modified>2019-11-18T20:19:12.108</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Захар Листьев\.nuget\packages\colorcode.core\2.0.6\lib\netstandard1.4\ColorCode.Core.dll">
       <PackagePath>ColorCode.Core.dll</PackagePath>
@@ -158,55 +158,55 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\TwitchClient.xr.xml">
       <PackagePath>TwitchClient.xr.xml</PackagePath>
-      <Modified>2019-11-15T12:13:14.589</Modified>
+      <Modified>2019-11-18T09:12:02.786</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Microsoft.UI.Xaml\DensityStyles\Compact.xbf">
       <PackagePath>Microsoft.UI.Xaml\DensityStyles\Compact.xbf</PackagePath>
-      <Modified>2019-11-15T12:13:14.642</Modified>
+      <Modified>2019-11-18T20:08:02.757</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2019-11-15T12:13:14.643</Modified>
+      <Modified>2019-11-18T20:08:02.758</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Styles\Page.xbf">
       <PackagePath>Styles\Page.xbf</PackagePath>
-      <Modified>2019-11-15T12:13:14.643</Modified>
+      <Modified>2019-11-18T20:08:02.757</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Styles\_Colors.xbf">
       <PackagePath>Styles\_Colors.xbf</PackagePath>
-      <Modified>2019-11-15T12:13:14.643</Modified>
+      <Modified>2019-11-18T20:08:02.757</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Styles\_FontSizes.xbf">
       <PackagePath>Styles\_FontSizes.xbf</PackagePath>
-      <Modified>2019-11-15T12:13:14.643</Modified>
+      <Modified>2019-11-18T20:08:02.757</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Styles\_Thickness.xbf">
       <PackagePath>Styles\_Thickness.xbf</PackagePath>
-      <Modified>2019-11-15T12:13:14.643</Modified>
+      <Modified>2019-11-18T20:08:02.758</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Styles\TextBlock.xbf">
       <PackagePath>Styles\TextBlock.xbf</PackagePath>
-      <Modified>2019-11-15T12:13:14.643</Modified>
+      <Modified>2019-11-18T20:08:02.758</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Views\MainPage.xbf">
       <PackagePath>Views\MainPage.xbf</PackagePath>
-      <Modified>2019-11-15T12:13:14.631</Modified>
+      <Modified>2019-11-18T20:08:02.745</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Views\MediaPage.xbf">
       <PackagePath>Views\MediaPage.xbf</PackagePath>
-      <Modified>2019-11-15T12:13:14.643</Modified>
+      <Modified>2019-11-18T20:08:02.750</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Views\ProjectionViewPage.xbf">
       <PackagePath>Views\ProjectionViewPage.xbf</PackagePath>
-      <Modified>2019-11-15T12:13:14.643</Modified>
+      <Modified>2019-11-18T20:08:02.758</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Views\SearchPage.xbf">
       <PackagePath>Views\SearchPage.xbf</PackagePath>
-      <Modified>2019-11-15T12:13:14.644</Modified>
+      <Modified>2019-11-18T20:08:02.758</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Views\ShellPage.xbf">
       <PackagePath>Views\ShellPage.xbf</PackagePath>
-      <Modified>2019-11-15T12:13:14.644</Modified>
+      <Modified>2019-11-18T20:08:02.758</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.18362.0\\redist\Debug\x86\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -226,11 +226,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2019-11-15T12:13:15.601</Modified>
+      <Modified>2019-11-18T19:12:46.016</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\bin\x86\Debug\Core\TwitchClient.exe">
       <PackagePath>TwitchClient.exe</PackagePath>
-      <Modified>2019-11-15T12:13:16.874</Modified>
+      <Modified>2019-11-18T20:19:13.382</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

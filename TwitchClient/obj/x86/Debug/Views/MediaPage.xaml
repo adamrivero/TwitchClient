@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:TwitchClient.ViewModels"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
 
@@ -33,7 +34,7 @@
                     </Grid.RowDefinitions>
                     <controls:Loading Grid.RowSpan="5" Grid.ColumnSpan="3" Canvas.ZIndex="1" Background="White" Opacity="0.7" IsLoading="{Binding IsLoading}">
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                            <ProgressRing x:ConnectionId='6' Width="50" Height="50"                                        />
+                            <ProgressRing x:ConnectionId='7' Width="50" Height="50"                                        />
                             <TextBlock FontWeight="SemiBold" FontSize="30" Text="Content is loading"/>
                         </StackPanel>
                     </controls:Loading>
@@ -55,19 +56,26 @@
                             <MediaTransportControls IsCompact="True" IsCompactOverlayEnabled="True" IsSeekBarVisible="False" IsZoomButtonVisible="False" IsCompactOverlayButtonVisible="True"></MediaTransportControls>
                         </MediaElement.TransportControls>
                     </MediaElement>
-                    <ListView x:ConnectionId='4' SelectionMode="None" x:Name="ChatBox" ScrollViewer.BringIntoViewOnFocusChange="True" Height="450" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollMode="Enabled" Grid.Column="2" ItemsSource="{Binding SelectedMedia.ChatMessages}" Style="{StaticResource HandwritingViewCandidateStyle}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <TextBlock>
-                                    <Run FontWeight="Medium" Text="{Binding User}"/>
-                                    <Run FontWeight="Medium" Text=": "/>
-                                    <Run Text="{Binding Message}"/>
-                                    </TextBlock>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                    <ScrollViewer CanDrag="True" Margin="5" Grid.Column="3" Height="450" Grid.ColumnSpan="2" ScrollViewer.BringIntoViewOnFocusChange="True">
+                    <RichTextBlock x:ConnectionId='5' ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsScrollInertiaEnabled="True" x:Name="ChatBox">
+                        <Paragraph>
+                            <InlineUIContainer>
+                                <ItemsControl ItemsSource="{Binding SelectedMedia.ChatMessages}" Margin="0">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                                <RichTextBlock CanBeScrollAnchor="True" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsScrollInertiaEnabled="True">
+                                                    <Paragraph>
+                                                    <Run FontWeight="Medium" Text="{Binding User}"/>
+                                                    <Run Text="{Binding Message}"/>
+                                                </Paragraph>
+                                            </RichTextBlock>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </InlineUIContainer>
+                        </Paragraph>
+                    </RichTextBlock>
+                    </ScrollViewer>
                     <Image Source="{Binding SelectedMedia.Atr_url}" Width="85" Height="113" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Top" Margin="4" HorizontalAlignment="Left"/>
                     <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
@@ -93,6 +101,7 @@
                             </TextBlock>
                             <Button Content="Record" HorizontalAlignment="Center" Command="{Binding StartRecordCommand}"/>
                             <Button Content="Stop" HorizontalAlignment="Center" Command="{Binding StopRecordCommand}"/>
+                            <Button x:ConnectionId='4' HorizontalAlignment="Center" VerticalAlignment="Center" Content="Cast"                      />
                         </StackPanel>
                     </Grid>
                 </Grid>
