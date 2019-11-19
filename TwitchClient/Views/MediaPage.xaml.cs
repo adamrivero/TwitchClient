@@ -48,10 +48,7 @@ namespace TwitchClient.Views
             // Hook up the events that are received when projection is stoppped
             pvb.ProjectionStopping += Pvb_ProjectionStopping;
         }
-        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            picker.Show(new Rect(100, 100, 100, 100), Windows.UI.Popups.Placement.Above);
-        }
+       
         private async void Picker_DeviceSelected(DevicePicker sender, DeviceSelectedEventArgs args)
         {
             //Casting must occur from the UI thread.  This dispatches the casting calls to the UI thread.

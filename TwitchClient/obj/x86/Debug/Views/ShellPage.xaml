@@ -28,15 +28,19 @@
             <winui:NavigationViewItem Foreground="White" x:Uid="Shell_Main" helpers:NavHelper.NavigateTo="TwitchClient.ViewModels.MainViewModel" />
             <winui:NavigationViewItem Foreground="White" x:Uid="Shell_Media" helpers:NavHelper.NavigateTo="TwitchClient.ViewModels.MediaViewModel" />
             <winui:NavigationViewItem Foreground="White" x:Uid="Shell_Search" helpers:NavHelper.NavigateTo="TwitchClient.ViewModels.SearchViewModel" />
-            <AppBarButton x:ConnectionId='4' Name="Auth"                                         />
-            <AutoSuggestBox x:ConnectionId='5' PlaceholderText="Поиск"                                                                                         Margin="10,4" Width="200" QueryIcon="Find">
-                <i:Interaction.Behaviors>
-                    <ic:EventTriggerBehavior EventName="QuerySubmitted">
-                        <ic:InvokeCommandAction x:ConnectionId='6'                                            />
-                    </ic:EventTriggerBehavior>
-                </i:Interaction.Behaviors>
-            </AutoSuggestBox>
         </winui:NavigationView.MenuItems>
+        <winui:NavigationView.PaneFooter>
+            <StackPanel Orientation="Horizontal">
+                <AppBarButton x:ConnectionId='4' Icon="Contact"                                         />
+                <AutoSuggestBox x:ConnectionId='5' PlaceholderText="Поиск"                                                                                         Margin="10,4" Width="200" QueryIcon="Find">
+                    <i:Interaction.Behaviors>
+                        <ic:EventTriggerBehavior EventName="QuerySubmitted">
+                           <ic:InvokeCommandAction x:ConnectionId='6'                                            />
+                        </ic:EventTriggerBehavior>
+                     </i:Interaction.Behaviors>
+                </AutoSuggestBox>
+            </StackPanel>
+        </winui:NavigationView.PaneFooter>
         <i:Interaction.Behaviors>
             <ic:EventTriggerBehavior EventName="ItemInvoked">
                 <ic:InvokeCommandAction x:ConnectionId='7'                                                 />

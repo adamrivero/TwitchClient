@@ -28,6 +28,7 @@ namespace TwitchClient.ViewModels
         readonly ApiRequest API;
         private string _login;
         TwitchConnection client;
+        public string ChannelID;
         private Visibility notifyVisibility;
         public Visibility NotifyVisibility
         {
@@ -71,12 +72,14 @@ namespace TwitchClient.ViewModels
         public ICommand StartRecordCommand { get; private set; }
         public ICommand StopRecordCommand { get; private set; }
         public ICommand ProjectionCommand { get; private set; }
+        public ICommand FollowCommand { get; private set; }
         public MediaViewModel()
         {
+            localData = ApplicationData.Current.LocalSettings;
             client = new TwitchConnection(
                     cluster: ChatEdgeCluster.Aws,
-                    nick: "justinfan1",
-                    oauth: "sad9di9wad", // no oauth: prefix
+                    nick: "zlistiev",
+                    oauth: (string)localData.Values["OAuth"], // no oauth: prefix
                     port: 6697,
                     capRequests: new string[] { "twitch.tv/tags", "twitch.tv/commands" },
                     ratelimit: 1500,
@@ -89,21 +92,27 @@ namespace TwitchClient.ViewModels
             NotifyVisibility = Visibility.Collapsed;
             //connection = new InternetConnection();
             ApplicationLanguages.PrimaryLanguageOverride = "en-US";
-            localData = ApplicationData.Current.LocalSettings;
             API = new ApiRequest();
             SelectedMedia = new MediaModel();
+            ChannelID = (string)localData.Values["ChannelID"];
             Login = (string)localData.Values["User_login"];
             GetStreams();
             StartRecordCommand = new RelayCommand(StartRecord);
             StopRecordCommand = new RelayCommand(StopRecord);
             ProjectionCommand = new RelayCommand(StartProjection);
+            FollowCommand = new RelayCommand(FollowChannel);
+        }
+
+        private async void FollowChannel()
+        {
+            var result = await API.GetProfileAsync((string)localData.Values["OAuth"]);
+            await API.FollowChannelAsync(result._id.ToString(), SelectedMedia.UserID, (string)localData.Values["OAuth"]);
         }
 
         private void StartProjection()
         {
-            // projection = new ProjectionControls(SelectedMedia.Video_source);
-            // projection.Start();
-            // Debug.WriteLine("РАБОТАЕТ");
+            client.SendMessage("#" + SelectedMedia.Login, "Привет");
+            Debug.WriteLine("Ну отправил");
         }
 
         private  void StartRecord()
@@ -162,18 +171,17 @@ namespace TwitchClient.ViewModels
                             Title = stream.title,
                             Viewer_count = stream.viewer_count,
                             View_count = users.data.FirstOrDefault(a => a.id == stream.user_id).view_count,
-                            ChatMessages = new ObservableCollection<ChatModel>()
+                            ChatMessages = new ObservableCollection<ChatModel>(),
+                            UserID = stream.user_id
                         };
                     }
                 }
-
 
                 client.Connected += (object sender, IrcConnectedEventArgs e) =>
                 {
                     Debug.WriteLine("Connected");
                     client.JoinChannel($"#{SelectedMedia.Login}");
                 };
-
                 client.MessageReceived += async (object sender, IrcMessageEventArgs e) =>
                 {
                     await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>

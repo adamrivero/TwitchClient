@@ -28,15 +28,19 @@
             <winui:NavigationViewItem Foreground="White" x:Uid="Shell_Main" helpers:NavHelper.NavigateTo="TwitchClient.ViewModels.MainViewModel" />
             <winui:NavigationViewItem Foreground="White" x:Uid="Shell_Media" helpers:NavHelper.NavigateTo="TwitchClient.ViewModels.MediaViewModel" />
             <winui:NavigationViewItem Foreground="White" x:Uid="Shell_Search" helpers:NavHelper.NavigateTo="TwitchClient.ViewModels.SearchViewModel" />
-            <AppBarButton Name="Auth" Command="{x:Bind ViewModel.AuthCommand}"/>
-            <AutoSuggestBox PlaceholderText="Поиск" Text="{x:Bind ViewModel.SearchParam, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="10,4" Width="200" QueryIcon="Find">
-                <i:Interaction.Behaviors>
-                    <ic:EventTriggerBehavior EventName="QuerySubmitted">
-                        <ic:InvokeCommandAction Command="{x:Bind ViewModel.SearchCommand}" />
-                    </ic:EventTriggerBehavior>
-                </i:Interaction.Behaviors>
-            </AutoSuggestBox>
         </winui:NavigationView.MenuItems>
+        <winui:NavigationView.PaneFooter>
+            <StackPanel Orientation="Horizontal">
+                <AppBarButton Icon="Contact" Command="{x:Bind ViewModel.AuthCommand}"/>
+                <AutoSuggestBox PlaceholderText="Поиск" Text="{x:Bind ViewModel.SearchParam, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="10,4" Width="200" QueryIcon="Find">
+                    <i:Interaction.Behaviors>
+                        <ic:EventTriggerBehavior EventName="QuerySubmitted">
+                           <ic:InvokeCommandAction Command="{x:Bind ViewModel.SearchCommand}" />
+                        </ic:EventTriggerBehavior>
+                     </i:Interaction.Behaviors>
+                </AutoSuggestBox>
+            </StackPanel>
+        </winui:NavigationView.PaneFooter>
         <i:Interaction.Behaviors>
             <ic:EventTriggerBehavior EventName="ItemInvoked">
                 <ic:InvokeCommandAction Command="{x:Bind ViewModel.ItemInvokedCommand}" />

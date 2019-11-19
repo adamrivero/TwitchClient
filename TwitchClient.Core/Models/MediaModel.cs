@@ -20,7 +20,23 @@ namespace TwitchClient.Core
         private string atr_url;
         private string game_name;
         private string login;
+        private string userID;
+        private string channelID;
         public ObservableCollection<ChatModel> ChatMessages { get; set; }
+        public string UserID
+        {
+            get { return userID; }
+            set { userID = value;
+                OnPropertyChanged("UserID");
+            }
+        }
+        public string ChannelID
+        {
+            get { return channelID; }
+            set { channelID = value;
+                OnPropertyChanged("ChannelID");
+            }
+        }
         public string Login
         {
             get { return login; }

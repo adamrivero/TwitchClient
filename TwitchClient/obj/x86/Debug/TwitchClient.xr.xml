@@ -12,6 +12,8 @@
     <RootPropertyPathName Name="Title" />
     <RootPropertyPathName Name="Thumbnail_url" />
     <RootPropertyPathName Name="IsLoading" />
+    <RootPropertyPathName Name="FollowCommand" />
+    <RootPropertyPathName Name="ProjectionCommand" />
     <RootPropertyPathName Name="StopRecordCommand" />
     <RootPropertyPathName Name="StartRecordCommand" />
     <RootPropertyPathName Name="SelectedMedia" />
@@ -211,6 +213,7 @@
       <RootProperty Name="FontFamily" />
       <RootProperty Name="FontWeight" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.TextBox" />
     <RootType FullName="Windows.UI.Xaml.Controls.RichTextBlock">
       <RootProperty Name="Blocks" />
       <RootProperty Name="CanBeScrollAnchor" />
@@ -251,6 +254,7 @@
       <RootProperty Name="PaneDisplayMode" />
       <RootProperty Name="Background" />
       <RootProperty Name="MenuItems" />
+      <RootProperty Name="PaneFooter" />
       <RootProperty Name="Content" />
     </RootType>
     <RootType FullName="Microsoft.UI.Xaml.Controls.NavigationViewItem">
@@ -261,7 +265,7 @@
       <RootMethod Name="SetNavigateTo" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.AppBarButton">
-      <RootProperty Name="Name" />
+      <RootProperty Name="Icon" />
       <RootProperty Name="Command" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.AutoSuggestBox">

@@ -75,7 +75,7 @@ namespace TwitchClient.ViewModels
         {
             Match match;
             string oauth_token = "";
-            Uri StartUri = new Uri($"https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=0pje11teayzq9z2najlxgdcc5d2dy1&redirect_uri=https://twitchapps.com/tokengen/");
+            Uri StartUri = new Uri($"https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=0pje11teayzq9z2najlxgdcc5d2dy1&redirect_uri=https://twitchapps.com/tokengen/&scope=chat%3Aread%20chat%3Aedit+user:read:email+user_read+channel_read+user_follows_edit");
             WebAuthenticationResult webAuthenticationResult = await WebAuthenticationBroker.AuthenticateAsync(WebAuthenticationOptions.None, StartUri, new Uri("https://twitchapps.com/tokengen/"));
             Debug.WriteLine(WebAuthenticationBroker.GetCurrentApplicationCallbackUri());
             switch (webAuthenticationResult.ResponseStatus)
@@ -85,7 +85,7 @@ namespace TwitchClient.ViewModels
                     Debug.WriteLine(webAuthenticationResult.ResponseData.ToString());
                     match = Regex.Match(webAuthenticationResult.ResponseData.ToString(), "#access_token=(?<token>.*)&scope=");
                     oauth_token = match.Groups["token"].Value;
-                    Debug.WriteLine(oauth_token);
+                    localData.Values["OAuth"] = oauth_token;
                     break;
                 // HTTP error.  
                 case WebAuthenticationStatus.ErrorHttp:

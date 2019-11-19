@@ -34,7 +34,7 @@
                     </Grid.RowDefinitions>
                     <controls:Loading Grid.RowSpan="5" Grid.ColumnSpan="3" Canvas.ZIndex="1" Background="White" Opacity="0.7" IsLoading="{Binding IsLoading}">
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                            <ProgressRing x:ConnectionId='7' Width="50" Height="50"                                        />
+                            <ProgressRing x:ConnectionId='6' Width="50" Height="50"                                        />
                             <TextBlock FontWeight="SemiBold" FontSize="30" Text="Content is loading"/>
                         </StackPanel>
                     </controls:Loading>
@@ -56,8 +56,9 @@
                             <MediaTransportControls IsCompact="True" IsCompactOverlayEnabled="True" IsSeekBarVisible="False" IsZoomButtonVisible="False" IsCompactOverlayButtonVisible="True"></MediaTransportControls>
                         </MediaElement.TransportControls>
                     </MediaElement>
-                    <ScrollViewer CanDrag="True" Margin="5" Grid.Column="3" Height="450" Grid.ColumnSpan="2" ScrollViewer.BringIntoViewOnFocusChange="True">
-                    <RichTextBlock x:ConnectionId='5' ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsScrollInertiaEnabled="True" x:Name="ChatBox">
+                    <StackPanel Orientation="Vertical" Grid.Column="3">
+                    <ScrollViewer CanDrag="True" Margin="5" Height="415" ScrollViewer.BringIntoViewOnFocusChange="True">
+                    <RichTextBlock x:ConnectionId='4' ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsScrollInertiaEnabled="True" x:Name="ChatBox">
                         <Paragraph>
                             <InlineUIContainer>
                                 <ItemsControl ItemsSource="{Binding SelectedMedia.ChatMessages}" Margin="0">
@@ -76,6 +77,8 @@
                         </Paragraph>
                     </RichTextBlock>
                     </ScrollViewer>
+                        <TextBox Grid.Column="3"/>
+                    </StackPanel>
                     <Image Source="{Binding SelectedMedia.Atr_url}" Width="85" Height="113" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Top" Margin="4" HorizontalAlignment="Left"/>
                     <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
@@ -101,7 +104,8 @@
                             </TextBlock>
                             <Button Content="Record" HorizontalAlignment="Center" Command="{Binding StartRecordCommand}"/>
                             <Button Content="Stop" HorizontalAlignment="Center" Command="{Binding StopRecordCommand}"/>
-                            <Button x:ConnectionId='4' HorizontalAlignment="Center" VerticalAlignment="Center" Content="Cast"                      />
+                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Cast" Command="{Binding ProjectionCommand}" />
+                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Follow" Command="{Binding FollowCommand}" />
                         </StackPanel>
                     </Grid>
                 </Grid>

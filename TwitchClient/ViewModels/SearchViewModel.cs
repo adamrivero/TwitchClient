@@ -47,6 +47,7 @@ namespace TwitchClient.ViewModels
         }
         private async void GetStreams(string param)
         {
+            if (param == null) param = "";
             var streams = await API.SearchStream(param);
             foreach (var stream in streams.streams)
             {

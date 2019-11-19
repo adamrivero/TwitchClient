@@ -137,6 +137,9 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
     </PackageReference>
+    <PackageReference Include="TwitchLib">
+      <Version>3.0.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="Strings\en-us\Resources.resw" />
@@ -148,10 +151,14 @@
     <Compile Include="Controls\ProjectedMediaTransportControls.cs" />
     <Compile Include="Controls\ProjectionViewBroker.cs" />
     <Compile Include="Controls\ViewLifetimeControl.cs" />
+    <Compile Include="Enums\BroadcastType.cs" />
+    <Compile Include="Enums\Period.cs" />
+    <Compile Include="Enums\SortBy.cs" />
+    <Compile Include="Enums\SortDirection.cs" />
+    <Compile Include="Enums\SortKey.cs" />
+    <Compile Include="Enums\StreamType.cs" />
     <Compile Include="Helpers\Downloader.cs" />
     <Compile Include="Helpers\NavHelper.cs" />
-    <Compile Include="HttpHelper.cs" />
-    <Compile Include="OAuth2Broker.cs" />
     <Compile Include="StartServer.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="Services\ActivationService.cs" />

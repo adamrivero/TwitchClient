@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -122,5 +123,40 @@ namespace TwitchClient
             var json = JsonConvert.DeserializeObject<SearchStreamModel>(result);
             return json;
         }
+        public async Task<SearchStreamModel> GetKrakenStreams(string ChannelID)
+        {
+            HttpClient httpClient = new HttpClient();
+            HttpRequestMessage request = new HttpRequestMessage(new HttpMethod("GET"), $"https://api.twitch.tv/kraken/streams/{ChannelID}");
+            request.Headers.Add("Client-ID", "0pje11teayzq9z2najlxgdcc5d2dy1");
+            request.Headers.Add("Accept", "application/vnd.twitchtv.v5+json");
+            var response = await httpClient.SendAsync(request);
+            var result = await response.Content.ReadAsStringAsync();
+            var json = JsonConvert.DeserializeObject<SearchStreamModel>(result);
+            return json;
+        }
+
+        public async Task<ProfileModel> GetProfileAsync(string OAuth)
+        {
+            HttpClient httpClient = new HttpClient();
+            HttpRequestMessage request = new HttpRequestMessage(new HttpMethod("GET"), $"https://api.twitch.tv/kraken/user");
+            request.Headers.Add("Client-ID", "0pje11teayzq9z2najlxgdcc5d2dy1");
+            request.Headers.Add("Accept", "application/vnd.twitchtv.v5+json");
+            request.Headers.Add("Authorization", "OAuth " + OAuth);
+            var response = await httpClient.SendAsync(request);
+            var result = await response.Content.ReadAsStringAsync();
+            var json = JsonConvert.DeserializeObject<ProfileModel>(result);
+            return json;
+        }
+        public async Task FollowChannelAsync(string userID, string channelID, string OAuth)
+        {
+            HttpClient httpClient = new HttpClient();
+            HttpRequestMessage request = new HttpRequestMessage(new HttpMethod("PUT"), $"https://api.twitch.tv/kraken/users/{userID}/follows/channels/{channelID}");
+            request.Headers.Add("Client-ID", "0pje11teayzq9z2najlxgdcc5d2dy1");
+            request.Headers.Add("Accept", "application/vnd.twitchtv.v5+json");
+            request.Headers.Add("Authorization", "OAuth " + OAuth);
+            var response = await httpClient.SendAsync(request);
+            Debug.WriteLine("You are succesfully following a channel");
+        }
+
     }
 }
