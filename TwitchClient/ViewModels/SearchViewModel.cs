@@ -47,20 +47,24 @@ namespace TwitchClient.ViewModels
         }
         private async void GetStreams(string param)
         {
-            if (param == null) param = "";
-            var streams = await API.SearchStream(param);
-            foreach (var stream in streams.streams)
+            var message = new MessageDialog("Не понятно что искать, введите запрос", "Упс");
+            if (param == null) await message.ShowAsync();
+            else
             {
-                streamModels.Add(new StreamModel
+                var streams = await API.SearchStream(param);
+                foreach (var stream in streams.streams)
                 {
-                    Profile_logo = stream.channel.logo,
-                    Thumbnail_url = stream.preview.large,
-                    Title = stream.channel.status,
-                    Game_name = stream.game,
-                    User_name = stream.channel.display_name,
-                    Viewer_count = stream.viewers,
-                    Id = stream.channel._id.ToString()
-                });
+                    streamModels.Add(new StreamModel
+                    {
+                        Profile_logo = stream.channel.logo,
+                        Thumbnail_url = stream.preview.large,
+                        Title = stream.channel.status,
+                        Game_name = stream.game,
+                        User_name = stream.channel.display_name,
+                        Viewer_count = stream.viewers,
+                        Id = stream.channel._id.ToString()
+                    });
+                }
             }
         }
     }

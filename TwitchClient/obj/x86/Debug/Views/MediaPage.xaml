@@ -6,7 +6,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:TwitchClient.ViewModels"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:local="using:TwitchClient.Helpers"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:vlc="using:VLC"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
 
@@ -14,11 +16,25 @@
         <Grid
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-
-            <ScrollViewer Height="auto" Grid.RowSpan="2">
+            <Grid>
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Height="25" Width="25" Margin="10,0,0,0" Grid.Column="0" Grid.Row="2" Grid.RowSpan="2">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="{Binding SelectedMedia.Logo}"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <TextBlock FontWeight="SemiBold" Margin="7,0,0,0" VerticalAlignment="Center" Text="{Binding SelectedMedia.Display_name}"/>
+                    <Grid VerticalAlignment="Center" Background="Red" Width="30" Margin="7,0,0,0" Height="18" CornerRadius="4">
+                        <TextBlock Text="LIVE" FontSize="10" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    </Grid>
+                    <Button Content="Follow" Margin="25,0,0,0" Height="30" VerticalAlignment="Center" Command="{Binding FollowCommand}"/>
+                </StackPanel>
+            </Grid>
+            <ScrollViewer Height="auto" Grid.Row="1" Grid.RowSpan="2">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -57,27 +73,33 @@
                         </MediaElement.TransportControls>
                     </MediaElement>
                     <StackPanel Orientation="Vertical" Grid.Column="3">
-                    <ScrollViewer CanDrag="True" Margin="5" Height="415" ScrollViewer.BringIntoViewOnFocusChange="True">
-                    <RichTextBlock x:ConnectionId='4' ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsScrollInertiaEnabled="True" x:Name="ChatBox">
-                        <Paragraph>
-                            <InlineUIContainer>
-                                <ItemsControl ItemsSource="{Binding SelectedMedia.ChatMessages}" Margin="0">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                                <RichTextBlock CanBeScrollAnchor="True" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsScrollInertiaEnabled="True">
-                                                    <Paragraph>
-                                                    <Run FontWeight="Medium" Text="{Binding User}"/>
-                                                    <Run Text="{Binding Message}"/>
-                                                </Paragraph>
-                                            </RichTextBlock>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-                            </InlineUIContainer>
-                        </Paragraph>
-                    </RichTextBlock>
-                    </ScrollViewer>
-                        <TextBox Grid.Column="3"/>
+                        <ScrollViewer x:ConnectionId='4' Name="ChatScroll" CanDrag="True" Margin="5" Height="415" ScrollViewer.BringIntoViewOnFocusChange="True">
+                            <i:Interaction.Behaviors>
+                                <local:ScrollHelper />
+                            </i:Interaction.Behaviors>
+                            <RichTextBlock >
+                                <Paragraph>
+                                    <InlineUIContainer>
+                                        <ItemsControl ItemsSource="{Binding SelectedMedia.ChatMessages}" Margin="0">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <RichTextBlock>
+                                                        <Paragraph>
+                                                            <Run FontWeight="Medium" Text="{Binding User}"/>
+                                                            <Run Text="{Binding Message}"/>
+                                                        </Paragraph>
+                                                    </RichTextBlock>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </InlineUIContainer>
+                                </Paragraph>
+                            </RichTextBlock>
+                        </ScrollViewer>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Text="{Binding ChatMessage, Mode=TwoWay}" Width="250"/>
+                            <Button Content="Send" Command="{Binding SendMessageCommand}"/>
+                        </StackPanel>
                     </StackPanel>
                     <Image Source="{Binding SelectedMedia.Atr_url}" Width="85" Height="113" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Top" Margin="4" HorizontalAlignment="Left"/>
                     <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="2">
@@ -105,7 +127,7 @@
                             <Button Content="Record" HorizontalAlignment="Center" Command="{Binding StartRecordCommand}"/>
                             <Button Content="Stop" HorizontalAlignment="Center" Command="{Binding StopRecordCommand}"/>
                             <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Cast" Command="{Binding ProjectionCommand}" />
-                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Follow" Command="{Binding FollowCommand}" />
+                            <Button Content="Share" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ShareCommand}" />
                         </StackPanel>
                     </Grid>
                 </Grid>

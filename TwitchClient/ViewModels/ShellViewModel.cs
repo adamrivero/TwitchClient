@@ -29,7 +29,6 @@ namespace TwitchClient.ViewModels
 {
     public class ShellViewModel : ViewModelBase
     {
-        StartServer ServerStart;
         private readonly KeyboardAccelerator _altLeftKeyboardAccelerator = BuildKeyboardAccelerator(VirtualKey.Left, VirtualKeyModifiers.Menu);
         private readonly KeyboardAccelerator _backKeyboardAccelerator = BuildKeyboardAccelerator(VirtualKey.GoBack);
         ApplicationDataContainer localData;
@@ -51,6 +50,7 @@ namespace TwitchClient.ViewModels
         private ICommand _itemInvokedCommand;
         private ICommand _searchCommand;
         private ICommand _authCommand;
+        private ICommand _themeCommand;
 
         public bool IsBackEnabled
         {
@@ -70,6 +70,7 @@ namespace TwitchClient.ViewModels
         public ICommand ItemInvokedCommand => _itemInvokedCommand ?? (_itemInvokedCommand = new RelayCommand<WinUI.NavigationViewItemInvokedEventArgs>(OnItemInvoked));
         public ICommand SearchCommand => _searchCommand ?? (_searchCommand = new RelayCommand(SearchStream));
         public ICommand AuthCommand => _authCommand ?? (_authCommand = new RelayCommand(Auth));
+        public ICommand ThemeCommand => _themeCommand ?? (_themeCommand = new RelayCommand(async () => { await ThemeSelectorService.SwitchThemeAsync();}));
 
         private async void Auth()
         {
@@ -102,7 +103,6 @@ namespace TwitchClient.ViewModels
             localData.Values["Search_param"] = SearchParam;
             localData.Values["Search_type"] = "TitleBarSearch";
             NavigationService.Navigate("TwitchClient.ViewModels.SearchViewModel", SearchParam);
-            Debug.WriteLine("SAdasjhdkjsahdjas");
         }
         public ShellViewModel()
         {
@@ -121,10 +121,6 @@ namespace TwitchClient.ViewModels
 
         private async void OnLoaded()
         {
-            // Keyboard accelerators are added here to avoid showing 'Alt + left' tooltip on the page.
-            // More info on tracking issue https://github.com/Microsoft/microsoft-ui-xaml/issues/8
-            ServerStart = new StartServer();
-            await Task.Run(() => ServerStart.DoWork());
             _keyboardAccelerators.Add(_altLeftKeyboardAccelerator);
             _keyboardAccelerators.Add(_backKeyboardAccelerator);
             await Task.CompletedTask;

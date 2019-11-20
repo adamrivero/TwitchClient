@@ -16,6 +16,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition/>
+                        <RowDefinition Height="50"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Margin="20,0,0,0" x:Uid="TopStream" VerticalAlignment="Center" FontWeight="SemiLight" FontSize="20"/>
@@ -40,7 +41,7 @@
                         </GridView.ItemsPanel>
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Grid Width="340" Margin="10">
+                                <Grid Width="340">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="25"/>
                                         <ColumnDefinition/>
@@ -68,6 +69,8 @@
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>
+                    <TextBlock Grid.Row="2" Margin="20,0,0,0" x:Uid="Channels" VerticalAlignment="Center" FontWeight="SemiLight" FontSize="20"/>
+
                 </Grid>
             </ScrollViewer>
         </Grid>

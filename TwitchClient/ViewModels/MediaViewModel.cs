@@ -10,6 +10,7 @@ using GalaSoft.MvvmLight.Command;
 using TwitchClient.Core;
 using TwitchClient.Helpers;
 using TwitchClient.TwitchIRC;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.Globalization;
 using Windows.Storage;
 using Windows.UI.Popups;
@@ -29,7 +30,17 @@ namespace TwitchClient.ViewModels
         private string _login;
         TwitchConnection client;
         public string ChannelID;
+        private string chatMessage;
         private Visibility notifyVisibility;
+        public string ChatMessage
+        {
+            get { return chatMessage; }
+            set
+            {
+                chatMessage = value;
+                RaisePropertyChanged("ChatMessage");
+            }
+        }
         public Visibility NotifyVisibility
         {
             get { return notifyVisibility; }
@@ -71,8 +82,9 @@ namespace TwitchClient.ViewModels
         public ICommand HomeCommand { get; private set; }
         public ICommand StartRecordCommand { get; private set; }
         public ICommand StopRecordCommand { get; private set; }
-        public ICommand ProjectionCommand { get; private set; }
+        public ICommand SendMessageCommand { get; private set; }
         public ICommand FollowCommand { get; private set; }
+        public ICommand ShareCommand { get; private set; }
         public MediaViewModel()
         {
             localData = ApplicationData.Current.LocalSettings;
@@ -99,8 +111,25 @@ namespace TwitchClient.ViewModels
             GetStreams();
             StartRecordCommand = new RelayCommand(StartRecord);
             StopRecordCommand = new RelayCommand(StopRecord);
-            ProjectionCommand = new RelayCommand(StartProjection);
+            SendMessageCommand = new RelayCommand(SendChatMessage);
             FollowCommand = new RelayCommand(FollowChannel);
+            ShareCommand = new RelayCommand(ShareContact);
+        }
+
+        private void ShareContact()
+        {
+            DataTransferManager dataTransferManager = DataTransferManager.GetForCurrentView();
+            dataTransferManager.DataRequested += DataTransferManager_DataRequested;
+            DataTransferManager.ShowShareUI();
+
+        }
+
+        private void DataTransferManager_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        {
+            DataRequest request = args.Request;
+            request.Data.SetWebLink(new Uri("https://twitch.tv/" + SelectedMedia.Login));
+            request.Data.Properties.Title = "Поделиться ссылкой";
+            request.Data.Properties.Description = "Вы можете поделиться ссылкой на трансляцию";
         }
 
         private async void FollowChannel()
@@ -109,18 +138,20 @@ namespace TwitchClient.ViewModels
             await API.FollowChannelAsync(result._id.ToString(), SelectedMedia.UserID, (string)localData.Values["OAuth"]);
         }
 
-        private void StartProjection()
+        private void SendChatMessage()
         {
-            client.SendMessage("#" + SelectedMedia.Login, "Привет");
+            client.SendMessage("#" + SelectedMedia.Login, ChatMessage);
+            SelectedMedia.ChatMessages.Add(new ChatModel { User = $"zlistiev", Message = $"{chatMessage}" });
+
             Debug.WriteLine("Ну отправил");
         }
 
-        private  void StartRecord()
+        private void StartRecord()
         {
             NotifyVisibility = Visibility.Visible;
             _downloader = new Downloader(SelectedMedia.Video_source, selectedMedia.Login, DateTime.Now.Second.ToString());
         }
-      
+
         private void StopRecord()
         {
             _downloader?.Stop();
@@ -148,13 +179,13 @@ namespace TwitchClient.ViewModels
                 });
                 thread1.Start();
                 string set_atr_size;
-                test();
-                async void test()
+                load();
+                async void load()
                 {
                     if (games.data == null || users.data == null)
                     {
                         Thread.Sleep(100);
-                        test();
+                        load();
                     }
                     else
                     {
@@ -172,7 +203,8 @@ namespace TwitchClient.ViewModels
                             Viewer_count = stream.viewer_count,
                             View_count = users.data.FirstOrDefault(a => a.id == stream.user_id).view_count,
                             ChatMessages = new ObservableCollection<ChatModel>(),
-                            UserID = stream.user_id
+                            UserID = stream.user_id,
+                            Logo = users.data[0].profile_image_url
                         };
                     }
                 }

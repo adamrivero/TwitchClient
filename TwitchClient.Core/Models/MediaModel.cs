@@ -22,7 +22,17 @@ namespace TwitchClient.Core
         private string login;
         private string userID;
         private string channelID;
+        private string logo;
         public ObservableCollection<ChatModel> ChatMessages { get; set; }
+        public string Logo
+        {
+            get { return logo; }
+            set
+            {
+                logo = value;
+                OnPropertyChanged("Logo");
+            }
+        }
         public string UserID
         {
             get { return userID; }
