@@ -128,6 +128,7 @@
                             <Button Content="Stop" HorizontalAlignment="Center" Command="{Binding StopRecordCommand}"/>
                             <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Cast" Command="{Binding ProjectionCommand}" />
                             <Button Content="Share" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ShareCommand}" />
+                            <Button Content="Pin tile" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding TileCommand}"/>
                         </StackPanel>
                     </Grid>
                 </Grid>

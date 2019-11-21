@@ -10,15 +10,11 @@ namespace TwitchClient.Helpers
 {
     public static class SettingsStorageExtensions
     {
-        // Use this extension methods to store and retrieve in local and roaming app data 
-        // For more info regarding storing and retrieving app data, 
-        // Documentation: https://docs.microsoft.com/windows/uwp/app-settings/store-and-retrieve-app-data
-
-        private const string fileExtension = ".json";
+        private const string FileExtension = ".json";
 
         public static bool IsRoamingStorageAvailable(this ApplicationData appData)
         {
-            return (appData.RoamingStorageQuota == 0);
+            return appData.RoamingStorageQuota == 0;
         }
 
         public static async Task SaveAsync<T>(this StorageFolder folder, string name, T content)
@@ -61,7 +57,7 @@ namespace TwitchClient.Helpers
 
         private static string GetFileName(string name)
         {
-            return string.Concat(name, fileExtension);
+            return string.Concat(name, FileExtension);
         }
     }
 }

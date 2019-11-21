@@ -11,33 +11,33 @@ namespace TwitchClient.Helpers
 {
     public class ScrollHelper : Behavior<ScrollViewer>
     {
-        private double _height = 0.0d;
-        private ScrollViewer _scrollViewer = null;
+        private double height = 0.0d;
+        private ScrollViewer scrollViewer = null;
 
         protected override void OnAttached()
         {
             base.OnAttached();
 
-            this._scrollViewer = base.AssociatedObject;
-            this._scrollViewer.LayoutUpdated += _scrollViewer_LayoutUpdated;
-        }
-
-        private void _scrollViewer_LayoutUpdated(object sender, object e)
-        {
-            if (Math.Abs(this._scrollViewer.ExtentHeight - _height) > 1)
-            {
-                this._scrollViewer.ScrollToVerticalOffset(this._scrollViewer.ExtentHeight);
-                this._height = this._scrollViewer.ExtentHeight;
-            }
+            this.scrollViewer = this.AssociatedObject;
+            this.scrollViewer.LayoutUpdated += ScrollViewer_LayoutUpdated;
         }
 
         protected override void OnDetaching()
         {
             base.OnDetaching();
 
-            if (this._scrollViewer != null)
+            if (this.scrollViewer != null)
             {
-                this._scrollViewer.LayoutUpdated -= _scrollViewer_LayoutUpdated;
+                this.scrollViewer.LayoutUpdated -= ScrollViewer_LayoutUpdated;
+            }
+        }
+
+        private void ScrollViewer_LayoutUpdated(object sender, object e)
+        {
+            if (Math.Abs(this.scrollViewer.ExtentHeight - height) > 1)
+            {
+                scrollViewer.ScrollToVerticalOffset(scrollViewer.ExtentHeight);
+                this.height = this.scrollViewer.ExtentHeight;
             }
         }
     }

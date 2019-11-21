@@ -8,9 +8,9 @@ using TwitchClient.Core;
 
 namespace TwitchClient
 {
-    class ApiRequest
+    internal class ApiRequest
     {
-        public async Task<String> ParseM3UAsync(Uri url, string quality)
+        public async Task<string> ParseM3UAsync(Uri url, string quality)
         {
             HttpClient http = new HttpClient();
 
@@ -36,6 +36,7 @@ namespace TwitchClient
 
             return "null";
         }
+
         public async Task<Uri> UriAsync(string login)
         {
             using (var httpClient = new HttpClient())
@@ -51,6 +52,7 @@ namespace TwitchClient
                 return new Uri($"https://usher.ttvnw.net/api/channel/hls/{login}.m3u8?allow_source=true&baking_bread=false&baking_brownies=false&baking_brownies_timeout=1050&fast_bread=true&p=844740&player_backend=mediaplayer&playlist_include_framerate=true&reassignments_supported=false&rtqos=control&sig={sig}&token={token}&cdm=wv");
             }
         }
+
         public async Task<UserModel> GetUserInfoAsync(string id)
         {
             HttpClient httpClient = new HttpClient();
@@ -61,6 +63,7 @@ namespace TwitchClient
             var json = JsonConvert.DeserializeObject<UserModel>(result);
             return json;
         }
+
         public async Task<StreamModel> GetStreamInfoAsync()
         {
             HttpClient httpClient = new HttpClient();
@@ -71,6 +74,7 @@ namespace TwitchClient
             var json = JsonConvert.DeserializeObject<StreamModel>(result);
             return json;
         }
+
         public async Task<StreamModel> GetStreamInfoAsync(string param)
         {
             HttpClient httpClient = new HttpClient();
@@ -81,6 +85,7 @@ namespace TwitchClient
             var json = JsonConvert.DeserializeObject<StreamModel>(result);
             return json;
         }
+
         public async Task<GameModel> GetGameInfoAsync(string gameID)
         {
             HttpClient httpClient = new HttpClient();
@@ -91,6 +96,7 @@ namespace TwitchClient
             var json = JsonConvert.DeserializeObject<GameModel>(result);
             return json;
         }
+
         public async Task<TopGamesModel> GetTopGameAsync()
         {
             HttpClient httpClient = new HttpClient();
@@ -101,6 +107,7 @@ namespace TwitchClient
             var json = JsonConvert.DeserializeObject<TopGamesModel>(result);
             return json;
         }
+
         public async Task<SearchStreamModel> SearchStream(string param)
         {
             HttpClient httpClient = new HttpClient();
@@ -112,6 +119,7 @@ namespace TwitchClient
             var json = JsonConvert.DeserializeObject<SearchStreamModel>(result);
             return json;
         }
+
         public async Task<SearchStreamModel> GetKrakenStreams()
         {
             HttpClient httpClient = new HttpClient();
@@ -123,10 +131,11 @@ namespace TwitchClient
             var json = JsonConvert.DeserializeObject<SearchStreamModel>(result);
             return json;
         }
-        public async Task<SearchStreamModel> GetKrakenStreams(string ChannelID)
+
+        public async Task<SearchStreamModel> GetKrakenStreams(string channelID)
         {
             HttpClient httpClient = new HttpClient();
-            HttpRequestMessage request = new HttpRequestMessage(new HttpMethod("GET"), $"https://api.twitch.tv/kraken/streams/{ChannelID}");
+            HttpRequestMessage request = new HttpRequestMessage(new HttpMethod("GET"), $"https://api.twitch.tv/kraken/streams/{channelID}");
             request.Headers.Add("Client-ID", "0pje11teayzq9z2najlxgdcc5d2dy1");
             request.Headers.Add("Accept", "application/vnd.twitchtv.v5+json");
             var response = await httpClient.SendAsync(request);
@@ -135,28 +144,28 @@ namespace TwitchClient
             return json;
         }
 
-        public async Task<ProfileModel> GetProfileAsync(string OAuth)
+        public async Task<ProfileModel> GetProfileAsync(string oAuth)
         {
             HttpClient httpClient = new HttpClient();
             HttpRequestMessage request = new HttpRequestMessage(new HttpMethod("GET"), $"https://api.twitch.tv/kraken/user");
             request.Headers.Add("Client-ID", "0pje11teayzq9z2najlxgdcc5d2dy1");
             request.Headers.Add("Accept", "application/vnd.twitchtv.v5+json");
-            request.Headers.Add("Authorization", "OAuth " + OAuth);
+            request.Headers.Add("Authorization", "OAuth " + oAuth);
             var response = await httpClient.SendAsync(request);
             var result = await response.Content.ReadAsStringAsync();
             var json = JsonConvert.DeserializeObject<ProfileModel>(result);
             return json;
         }
-        public async Task FollowChannelAsync(string userID, string channelID, string OAuth)
+
+        public async Task FollowChannelAsync(string userID, string channelID, string oAuth)
         {
             HttpClient httpClient = new HttpClient();
             HttpRequestMessage request = new HttpRequestMessage(new HttpMethod("PUT"), $"https://api.twitch.tv/kraken/users/{userID}/follows/channels/{channelID}");
             request.Headers.Add("Client-ID", "0pje11teayzq9z2najlxgdcc5d2dy1");
             request.Headers.Add("Accept", "application/vnd.twitchtv.v5+json");
-            request.Headers.Add("Authorization", "OAuth " + OAuth);
+            request.Headers.Add("Authorization", "OAuth " + oAuth);
             var response = await httpClient.SendAsync(request);
             Debug.WriteLine("You are succesfully following a channel");
         }
-
     }
 }

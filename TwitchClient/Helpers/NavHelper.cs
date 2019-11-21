@@ -15,6 +15,9 @@ namespace TwitchClient.Helpers
         //
         // Usage in code:
         // NavHelper.SetNavigateTo(navigationViewItem, typeof(MainViewModel).FullName);
+        public static readonly DependencyProperty NavigateToProperty =
+           DependencyProperty.RegisterAttached("NavigateTo", typeof(string), typeof(NavHelper), new PropertyMetadata(null));
+
         public static string GetNavigateTo(NavigationViewItem item)
         {
             return (string)item.GetValue(NavigateToProperty);
@@ -24,8 +27,5 @@ namespace TwitchClient.Helpers
         {
             item.SetValue(NavigateToProperty, value);
         }
-
-        public static readonly DependencyProperty NavigateToProperty =
-            DependencyProperty.RegisterAttached("NavigateTo", typeof(string), typeof(NavHelper), new PropertyMetadata(null));
     }
 }

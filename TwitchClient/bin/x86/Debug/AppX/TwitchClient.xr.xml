@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Roots >
   <Roots.PropertyPathNames>
-    <RootPropertyPathName Name="topGameModels" />
+    <RootPropertyPathName Name="TopGameModels" />
     <RootPropertyPathName Name="Name" />
     <RootPropertyPathName Name="Box_art_url" />
-    <RootPropertyPathName Name="streamModels" />
+    <RootPropertyPathName Name="StreamModels" />
     <RootPropertyPathName Name="Game_name" />
     <RootPropertyPathName Name="Viewer_count" />
     <RootPropertyPathName Name="User_name" />
@@ -12,6 +12,7 @@
     <RootPropertyPathName Name="Title" />
     <RootPropertyPathName Name="Thumbnail_url" />
     <RootPropertyPathName Name="IsLoading" />
+    <RootPropertyPathName Name="TileCommand" />
     <RootPropertyPathName Name="ShareCommand" />
     <RootPropertyPathName Name="ProjectionCommand" />
     <RootPropertyPathName Name="StopRecordCommand" />

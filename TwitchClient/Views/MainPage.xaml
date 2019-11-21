@@ -30,7 +30,7 @@
                     </controls:Loading>
 
                     <TextBlock Margin="20,0,0,0" Text="Популярные трансляции" VerticalAlignment="Center" FontWeight="SemiLight" FontSize="20"/>
-                    <GridView ItemsSource="{Binding streamModels, UpdateSourceTrigger=PropertyChanged}"
+                    <GridView ItemsSource="{Binding StreamModels, UpdateSourceTrigger=PropertyChanged}"
                   IsItemClickEnabled="True"
                   IsSwipeEnabled="true"
                   SelectionMode="Single"
@@ -80,7 +80,7 @@
                         </GridView.ItemTemplate>
                     </GridView>
                     <TextBlock Grid.Row="2" Margin="20,0,0,0" Text="Популярные категории" VerticalAlignment="Top" FontWeight="SemiLight" FontSize="20"/>
-                    <GridView  ItemsSource="{Binding topGameModels, UpdateSourceTrigger=PropertyChanged}"
+                    <GridView  ItemsSource="{Binding TopGameModels, UpdateSourceTrigger=PropertyChanged}"
                   IsItemClickEnabled="True"
                   IsSwipeEnabled="true"
                   SelectionMode="Single"

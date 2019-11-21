@@ -1,26 +1,22 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading;
-using System.Windows.Input;
-using GalaSoft.MvvmLight;
 using TwitchClient.Core;
 using TwitchClient.Services;
-using TwitchClient.Views;
 using Windows.Storage;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
 
 namespace TwitchClient.ViewModels
 {
     public class SearchViewModel : ViewModelBase
     {
-        public static NavigationServiceEx NavigationService => ViewModelLocator.Current.NavigationService;
-        readonly ApiRequest API;
-        ApplicationDataContainer localData;
-        private string searchParam;
-        public ObservableCollection<StreamModel> streamModels { get; private set; }
+
+        private readonly ApiRequest api;
+        private readonly ApplicationDataContainer localData;
+        private readonly string searchParam;
+
         public SearchViewModel()
         {
             localData = ApplicationData.Current.LocalSettings;
@@ -32,29 +28,38 @@ namespace TwitchClient.ViewModels
             {
                 searchParam = (string)localData.Values["Search_param"];
             }
-            streamModels = new ObservableCollection<StreamModel>();
-            API = new ApiRequest();
+
+            StreamModels = new ObservableCollection<StreamModel>();
+            api = new ApiRequest();
             GetStreams(searchParam);
         }
 
+        public static NavigationServiceEx NavigationService => ViewModelLocator.Current.NavigationService;
+
+        public ObservableCollection<StreamModel> StreamModels { get; private set; }
+
         public async void ClickCommand(object sender, object parameter)
         {
-            var arg = parameter as ItemClickEventArgs;
-            var item = arg.ClickedItem as StreamModel;
-            var UserLogin = await API.GetUserInfoAsync(item.Id);
-            localData.Values["User_login"] = UserLogin.data.First().login;
+            ItemClickEventArgs arg = parameter as ItemClickEventArgs;
+            StreamModel item = arg.ClickedItem as StreamModel;
+            UserModel userLogin = await api.GetUserInfoAsync(item.Id);
+            localData.Values["User_login"] = userLogin.data.First().login;
             NavigationService.Navigate("TwitchClient.ViewModels.MediaViewModel");
         }
+
         private async void GetStreams(string param)
         {
-            var message = new MessageDialog("Не понятно что искать, введите запрос", "Упс");
-            if (param == null) await message.ShowAsync();
+            MessageDialog message = new MessageDialog("Не понятно что искать, введите запрос", "Упс");
+            if (param == null || param == string.Empty)
+            {
+                await message.ShowAsync();
+            }
             else
             {
-                var streams = await API.SearchStream(param);
-                foreach (var stream in streams.streams)
+                SearchStreamModel streams = await api.SearchStream(param);
+                foreach (SearchStreamModel.Stream stream in streams.streams)
                 {
-                    streamModels.Add(new StreamModel
+                    StreamModels.Add(new StreamModel
                     {
                         Profile_logo = stream.channel.logo,
                         Thumbnail_url = stream.preview.large,
@@ -62,7 +67,7 @@ namespace TwitchClient.ViewModels
                         Game_name = stream.game,
                         User_name = stream.channel.display_name,
                         Viewer_count = stream.viewers,
-                        Id = stream.channel._id.ToString()
+                        Id = stream.channel._id.ToString(),
                     });
                 }
             }

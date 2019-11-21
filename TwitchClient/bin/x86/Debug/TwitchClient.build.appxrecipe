@@ -109,11 +109,8 @@
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\bin\10.0.18362.0\XamlCompiler\Microsoft.UI.Xaml.Markup.winmd">
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\ffmpeg.exe">
-      <PackagePath>ffmpeg.exe</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\Properties\Default.rd.xml">
-      <PackagePath>Properties\Default.rd.xml</PackagePath>
+    <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\Assets\tile-sdk.png">
+      <PackagePath>Assets\tile-sdk.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
@@ -141,6 +138,12 @@
     <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\ffmpeg.exe">
+      <PackagePath>ffmpeg.exe</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Projects\TwitchClient\TwitchClient\Properties\Default.rd.xml">
+      <PackagePath>Properties\Default.rd.xml</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Захар Листьев\.nuget\packages\libvlcx\3.1.0.1\build\uap10.0\x86\libvlc.dll">
       <PackagePath>libvlc.dll</PackagePath>

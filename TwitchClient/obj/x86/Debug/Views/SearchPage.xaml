@@ -20,7 +20,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Margin="20,0,0,0" x:Uid="TopStream" VerticalAlignment="Center" FontWeight="SemiLight" FontSize="20"/>
-                    <GridView ItemsSource="{Binding streamModels, UpdateSourceTrigger=PropertyChanged}"
+                    <GridView ItemsSource="{Binding StreamModels, UpdateSourceTrigger=PropertyChanged}"
                   IsItemClickEnabled="True"
                   IsSwipeEnabled="true"
                   SelectionMode="Single"

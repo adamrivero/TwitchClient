@@ -10,14 +10,14 @@ namespace TwitchClient.Activation
 {
     internal class DefaultActivationHandler : ActivationHandler<IActivatedEventArgs>
     {
-        private readonly string _navElement;
-
-        public NavigationServiceEx NavigationService => ViewModelLocator.Current.NavigationService;
+        private readonly string navElement;
 
         public DefaultActivationHandler(Type navElement)
         {
-            _navElement = navElement.FullName;
+            this.navElement = navElement.FullName;
         }
+
+        public NavigationServiceEx NavigationService => ViewModelLocator.Current.NavigationService;
 
         protected override async Task HandleInternalAsync(IActivatedEventArgs args)
         {
@@ -29,14 +29,14 @@ namespace TwitchClient.Activation
                 arguments = launchArgs.Arguments;
             }
 
-            NavigationService.Navigate(_navElement, arguments);
+            NavigationService.Navigate(navElement, arguments);
             await Task.CompletedTask;
         }
 
         protected override bool CanHandleInternal(IActivatedEventArgs args)
         {
             // None of the ActivationHandlers has handled the app activation
-            return NavigationService.Frame.Content == null && _navElement != null;
+            return NavigationService.Frame.Content == null && navElement != null;
         }
     }
 }

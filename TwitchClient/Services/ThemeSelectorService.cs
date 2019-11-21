@@ -13,9 +13,10 @@ namespace TwitchClient.Services
     {
         private const string SettingsKey = "RequestedTheme";
 
-        public static event EventHandler<ElementTheme> OnThemeChanged = delegate { };
+        public static event EventHandler<ElementTheme> OnThemeChanged = (sender, e) => { };
 
         public static bool IsLightThemeEnabled => Theme == ElementTheme.Light;
+
         public static ElementTheme Theme { get; set; }
 
         public static async Task InitializeAsync()
@@ -56,7 +57,7 @@ namespace TwitchClient.Services
         {
             ElementTheme cacheTheme = ElementTheme.Light;
             string themeName = await ApplicationData.Current.LocalSettings.ReadAsync<string>(SettingsKey);
-            if (String.IsNullOrEmpty(themeName))
+            if (string.IsNullOrEmpty(themeName))
             {
                 cacheTheme = Application.Current.RequestedTheme == ApplicationTheme.Dark ? ElementTheme.Dark : ElementTheme.Light;
             }
@@ -64,6 +65,7 @@ namespace TwitchClient.Services
             {
                 Enum.TryParse<ElementTheme>(themeName, out cacheTheme);
             }
+
             return cacheTheme;
         }
 

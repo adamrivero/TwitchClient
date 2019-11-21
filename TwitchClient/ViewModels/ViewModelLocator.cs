@@ -10,9 +10,8 @@ namespace TwitchClient.ViewModels
     [Windows.UI.Xaml.Data.Bindable]
     public class ViewModelLocator
     {
-        private static ViewModelLocator _current;
+        private static ViewModelLocator current;
 
-        public static ViewModelLocator Current => _current ?? (_current = new ViewModelLocator());
         private ViewModelLocator()
         {
             SimpleIoc.Default.Register(() => new NavigationServiceEx());
@@ -21,6 +20,8 @@ namespace TwitchClient.ViewModels
             Register<MediaViewModel, MediaPage>();
             Register<SearchViewModel, SearchPage>();
         }
+
+        public static ViewModelLocator Current => current ?? (current = new ViewModelLocator());
 
         public SearchViewModel SearchViewModel => SimpleIoc.Default.GetInstance<SearchViewModel>();
 
@@ -32,12 +33,12 @@ namespace TwitchClient.ViewModels
 
         public NavigationServiceEx NavigationService => SimpleIoc.Default.GetInstance<NavigationServiceEx>();
 
-        public void Register<VM, V>()
-            where VM : class
+        public void Register<TVM, TV>()
+            where TVM : class
         {
-            SimpleIoc.Default.Register<VM>();
+            SimpleIoc.Default.Register<TVM>();
 
-            NavigationService.Configure(typeof(VM).FullName, typeof(V));
+            NavigationService.Configure(typeof(TVM).FullName, typeof(TV));
         }
     }
 }

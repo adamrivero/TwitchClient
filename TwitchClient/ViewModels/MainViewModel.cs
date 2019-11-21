@@ -1,18 +1,13 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using System.Windows.Input;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Views;
-using Microsoft.Toolkit.Uwp.Connectivity;
 using TwitchClient.Core;
 using TwitchClient.Services;
-using TwitchClient.Views;
 using Windows.Storage;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 
@@ -20,106 +15,99 @@ namespace TwitchClient.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        public static NavigationServiceEx NavigationService => ViewModelLocator.Current.NavigationService;
+        private readonly ApplicationDataContainer localData;
+        private readonly ApiRequest api;
         private bool isLoading;
+        private string searchParam;
+
+        public MainViewModel()
+        {
+            IsLoading = true;
+            localData = ApplicationData.Current.LocalSettings;
+            api = new ApiRequest();
+            TopGameModels = new ObservableCollection<TopGamesModel>();
+            StreamModels = new ObservableCollection<StreamModel>();
+            SearchCommand = new RelayCommand(SearchStream);
+            GetStreams();
+        }
+
+        public static NavigationServiceEx NavigationService => ViewModelLocator.Current.NavigationService;
+
+        public ObservableCollection<TopGamesModel> TopGameModels { get; private set; }
+
+        public ObservableCollection<StreamModel> StreamModels { get; private set; }
+
         public bool IsLoading
         {
-            get { return isLoading; }
+            get => isLoading;
             set
             {
                 isLoading = value;
                 RaisePropertyChanged("IsLoading");
             }
         }
-        private string searchParam;
+
         public string SearchParam
         {
-            get { return searchParam; }
+            get => searchParam;
             set
             {
                 searchParam = value;
                 RaisePropertyChanged("SearchParam");
             }
         }
-        ApplicationDataContainer localData;
-        readonly ApiRequest API;
-        public ObservableCollection<TopGamesModel> topGameModels { get; private set; }
-        public ObservableCollection<StreamModel> streamModels { get; private set; }
+
         public ICommand SearchCommand { get; private set; }
-        public MainViewModel()
-        {
-            IsLoading = true;
-            localData = ApplicationData.Current.LocalSettings;
-            API = new ApiRequest();
-            topGameModels = new ObservableCollection<TopGamesModel>();
-            streamModels = new ObservableCollection<StreamModel>();
-            SearchCommand = new RelayCommand(SearchStream);
-            GetStreams();
-        }
-        public void Initialize()
-        {
-            Debug.WriteLine("Hello");
-        }
+
         public void SearchStream()
         {
             localData.Values["Search_param"] = SearchParam;
         }
+
         public async void ClickCommand(object sender, object parameter)
         {
-            var arg = parameter as ItemClickEventArgs;
-            var item = arg.ClickedItem as StreamModel;
-            var UserLogin = await API.GetUserInfoAsync(item.Id);
-            localData.Values["User_login"] = UserLogin.data.First().login;
+            ItemClickEventArgs arg = parameter as ItemClickEventArgs;
+            StreamModel item = arg.ClickedItem as StreamModel;
+            UserModel userLogin = await api.GetUserInfoAsync(item.Id);
+            localData.Values["User_login"] = userLogin.data.First().login;
             NavigationService.Navigate("TwitchClient.ViewModels.MediaViewModel", null, new DrillInNavigationTransitionInfo());
         }
+
         public void CategoryCommand(object sender, object parameter)
         {
-            var arg = parameter as ItemClickEventArgs;
-            var item = arg.ClickedItem as TopGamesModel;
+            ItemClickEventArgs arg = parameter as ItemClickEventArgs;
+            TopGamesModel item = arg.ClickedItem as TopGamesModel;
             localData.Values["Game_name"] = item.Name;
             localData.Values["Search_type"] = "Category";
             NavigationService.Navigate("TwitchClient.ViewModels.SearchViewModel", null, new DrillInNavigationTransitionInfo());
         }
+
         private async void GetStreams()
         {
-                var streams = await API.GetKrakenStreams();
-                var TopGames = await API.GetTopGameAsync();
-                foreach (var stream in streams.streams)
-                {
-                    try
+            SearchStreamModel streams = await api.GetKrakenStreams();
+            TopGamesModel topGames = await api.GetTopGameAsync();
+            foreach (SearchStreamModel.Stream stream in streams.streams)
+            {
+                    StreamModels.Add(new StreamModel
                     {
-                        streamModels.Add(new StreamModel
-                        {
-                            Profile_logo = stream.channel.logo,
-                            Thumbnail_url = stream.preview.large,
-                            Title = stream.channel.status,
-                            Game_name = stream.game,
-                            User_name = stream.channel.display_name,
-                            Viewer_count = stream.viewers,
-                            Id = stream.channel._id.ToString()
-                        });
-                    }
-                    catch
-                    {
-                        streamModels.Add(new StreamModel
-                        {
-                            Profile_logo = stream.channel.logo,
-                            Thumbnail_url = stream.preview.medium,
-                            Title = stream.channel.status,
-                            Game_name = stream.game,
-                            User_name = stream.channel.display_name,
-                            Viewer_count = stream.viewers,
-                            Id = stream.channel._id.ToString()
-                        });
-                    }
-                }
-                foreach (var TopGame in TopGames.data)
-                {
-                    string set_atr_size = TopGame.box_art_url.Replace("{width}", "188");
-                    set_atr_size = set_atr_size.Replace("{height}", "250");
-                    topGameModels.Add(new TopGamesModel { Box_art_url = set_atr_size, Id = TopGame.id, Name = TopGame.name });
-                }
-                IsLoading = false;
+                        Profile_logo = stream.channel.logo,
+                        Thumbnail_url = stream.preview.large,
+                        Title = stream.channel.status,
+                        Game_name = stream.game,
+                        User_name = stream.channel.display_name,
+                        Viewer_count = stream.viewers,
+                        Id = stream.channel._id.ToString(),
+                    });
             }
+
+            foreach (TopGamesModel.Datum topGame in topGames.data)
+            {
+                string set_atr_size = topGame.box_art_url.Replace("{width}", "188");
+                set_atr_size = set_atr_size.Replace("{height}", "250");
+                TopGameModels.Add(new TopGamesModel { Box_art_url = set_atr_size, Id = topGame.id, Name = topGame.name });
+            }
+
+            IsLoading = false;
+        }
     }
 }
